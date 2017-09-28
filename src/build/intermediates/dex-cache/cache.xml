@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/Infrared/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.2/3edcfe49d2c6053a70a2a47e4e1c2f94998a49cf/gson-2.8.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="3edcfe49d2c6053a70a2a47e4e1c2f94998a49cf">
+        <dex dex="/Users/Infrared/Downloads/kivrikog-CountBook/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.8.2_4f8b663b11ba07f67b4a90d9640c03d0d949206b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Infrared/Downloads/kivrikog-CountBook/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/Infrared/Downloads/kivrikog-CountBook/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_0fb7d8a87f1b41a246896002aa4e97bfde6f77bd/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Infrared/Downloads/kivrikog-CountBook/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="b295141c461cb626e0011ca8dd30a9d1986a94ed">
+        <dex dex="/Users/Infrared/Downloads/kivrikog-CountBook/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_48b96425c70a55fd28e1cb65ee63822c8aa12214/classes.dex" />
+    </item>
+
+</items>
