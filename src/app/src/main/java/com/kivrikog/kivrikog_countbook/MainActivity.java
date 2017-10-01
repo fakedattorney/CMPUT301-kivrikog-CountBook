@@ -1,12 +1,16 @@
 package com.kivrikog.kivrikog_countbook;
 
+import android.support.v7.app.AppCompatActivity;
+
+
+import android.support.v7.app.AppCompatActivity;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -38,6 +42,17 @@ import static com.kivrikog.kivrikog_countbook.R.id.current_date;
 import static com.kivrikog.kivrikog_countbook.R.id.etValue;
 import static com.kivrikog.kivrikog_countbook.R.id.initialValue;
 
+/*
+*MainActivity Class
+*
+* Version 1.0
+*
+* Date September 30th, 2017
+*
+* Copyright Notice: This project have been created for class 301 by Pelin Kivrikoglu, all rights reserved.
+*
+ */
+
 public class MainActivity extends AppCompatActivity {
     private static final String FILENAME = "file.sav";
 
@@ -55,7 +70,11 @@ public class MainActivity extends AppCompatActivity {
     //assigning the date calender button and list view we will be using
 
 
-
+/*onCreate method
+*@param calendar for the date
+* @param lvItems listview of the items
+* @param add_counter adds the counter when button pressed
+ */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this,AddCounter.class);
                 startActivity(i);
+                loadFromFile();
                 //here we will intent and when we click the button we will switch to addcounter activity from main activity
             }
         });
@@ -82,7 +102,13 @@ public class MainActivity extends AppCompatActivity {
         if(EditCounter.items.isEmpty())
             Toast.makeText(MainActivity.this,"No data. Click button to add some", Toast.LENGTH_SHORT).show();
         lvItems.setAdapter(customAdapter);
-
+/*setOnClickListener method creates alert dialog for editing counters
+* @see add.setonClicklistener
+* @see minus.setOncliklistener
+* @see reset.setOnClickListener
+* @see mLogin.setOnClickListener
+* @param value
+ */
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
@@ -130,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         int value = Integer.parseInt(editTextValue.getText().toString());
-                        value=0;
+                        value=0;//reseting our value
                         editTextValue.setText(String.valueOf(value));
                         saveInFile();
                     }
@@ -159,6 +185,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        /*lvitems.setOnItemLongClickListener if pressed long the counter will be deleted
+        *@returns false if removed
+        * @param items list of items
+         */
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -171,19 +201,32 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+/*
+*Class CustomAdapter extends from BaseAdapter
+*
+ */
 
     class CustomAdapter extends BaseAdapter {
-
+/*getCount will get the counter
+*@return EditCounter.items.size()
+ */
         @Override
         public int getCount() {
             return EditCounter.items.size();
         }
+        /*Object getItem
+        *@return null
+        * @param i
+         */
 
         @Override
         public Object getItem(int i) {
             return null;
         }
+/*Object getItemId
+        *@return 0
+        * @param i
+         */
 
         @Override
         public long getItemId(int i) {
@@ -207,44 +250,34 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+    /*loadFromFile loads the files we saved
+        *@throw FileNotFoundException
+        * @throw IOException
+         */
 
-    protected void onStart(){
-        super.onStart();
-        loadFromFile();
-
-
-    }
     private void loadFromFile() {
-        Log.d("loading","1");
-
         try {
             FileInputStream fis = openFileInput(FILENAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             String line = in.readLine();
             Gson gson = new Gson();
             Type listType = new TypeToken<ArrayList<Counter>>() {}.getType();
-
-            //temp = gson.fromJson(in,listType);
             items = gson.fromJson(in,listType);
 
-            Log.d("Items:", "" + items.size());
-            Log.d("loading","2");
-
         } catch (FileNotFoundException e) {
-            Log.d("loading","3");
-
             e.printStackTrace();
         } catch (IOException e) {
-            Log.d("loading","4");
-
             throw new RuntimeException();
         }
-
+        //will be loading from the file we saved from
 
     }
-    private void saveInFile() {
-        Log.d("saving","1");
+    /*saveInFile saves the files
+        *@throw FileNotFoundException
+        * @throw IOException
+         */
 
+    private void saveInFile() {
         try {
             FileOutputStream fos = openFileOutput(FILENAME,Context.MODE_PRIVATE);
             OutputStreamWriter writer = new OutputStreamWriter(fos);
@@ -252,17 +285,14 @@ public class MainActivity extends AppCompatActivity {
             gson.toJson(items, writer);
             writer.flush();
             fos.close();
-            Log.d("saving","2");
-            Log.d("size of items when saving", ""+items.size());
-
         } catch (FileNotFoundException e) {
             throw new RuntimeException();
         } catch (IOException e) {
             throw new RuntimeException();
         }
-        Log.d("saving","3");
-
     }
+
+    //saving using gson
 
 
 
